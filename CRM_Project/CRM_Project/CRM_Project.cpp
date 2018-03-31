@@ -2,10 +2,23 @@
 //
 
 #include "stdafx.h"
+#include "Case.h"
+#include "CaseManager.h"
+#include "Client.h"
+#include "ClientManager.h"
+#include "Company.h"
+#include "CompanyManager.h"
+#include "CustomerService.h"
+#include "CustomerServiceManager.h"
+#include "DBManager.h"
+#include "sqlite3.h"
+#include "sqlite3ext.h"
+#include <iomanip>
 
+using namespace std;
 int _tmain(int argc, _TCHAR* argv[])
 {
-	int A;
+
 	return 0;
 }
 

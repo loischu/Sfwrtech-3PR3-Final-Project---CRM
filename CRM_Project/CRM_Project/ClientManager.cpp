@@ -27,7 +27,7 @@ void ClientManager::AddClient(Client c)
 		<< c.get_title()
 		<< c.get_name() << "','"
 		<< c.get_emailAddress() << "','"
-		<< c.get_phoneNumber << "',"
+		<< c.get_phoneNumber() << "',"
 		<< c.get_physicalAddress() << "','"
 		<< c.get_notes() << "')";
 
@@ -43,7 +43,7 @@ void ClientManager::UpdateClient(Client c)
 
 	ostringstream oss;
 
-	oss << " SET title = '" << c.c.get_title() << "',"
+	oss << " SET title = '" << c.get_title() << "',"
 		<< "	 name	 = '" << c.get_name() << "',"
 		<< "	 email_address = '" << c.get_emailAddress() << "',"
 		<< "	phone_number = '" << c.get_phoneNumber() << ","

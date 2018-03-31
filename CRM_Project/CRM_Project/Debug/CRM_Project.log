@@ -1,1 +1,27 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Platform.targets(54,5): error MSB8020: The build tools for Visual Studio 2012 (Platform Toolset = 'v110') cannot be found. To build using the v110 build tools, please install Visual Studio 2012 build tools.  Alternatively, you may upgrade to the current Visual Studio tools by selecting the Project menu or right-click the solution, and then selecting "Retarget solution".
+﻿Build started 3/31/2018 3:02:43 PM.
+     1>Project "C:\Users\sanke\Documents\GitHub\Sfwrtech-3PR3-Final-Project---CRM\CRM_Project\CRM_Project\CRM_Project.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\CRM_Project.pch" /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt CRM_Project.cpp CaseManager.cpp ClientManager.cpp CompanyManager.cpp CustomerServiceManager.cpp DBManager.cpp
+         DBManager.cpp
+     1>c:\users\sanke\documents\github\sfwrtech-3pr3-final-project---crm\crm_project\crm_project\dbmanager.h(32): warning C4091: 'static ' : ignored on left of 'DBManager' when no variable is declared
+     1>c:\users\sanke\documents\github\sfwrtech-3pr3-final-project---crm\crm_project\crm_project\dbmanager.cpp(152): error C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+                 c:\program files (x86)\microsoft visual studio 11.0\vc\include\string.h(115) : see declaration of 'strcat'
+         Generating Code...
+         Compiling...
+         CRM_Project.cpp
+     1>c:\users\sanke\documents\github\sfwrtech-3pr3-final-project---crm\crm_project\crm_project\casemanager.h(16): warning C4091: 'static ' : ignored on left of 'CaseManager' when no variable is declared
+     1>c:\users\sanke\documents\github\sfwrtech-3pr3-final-project---crm\crm_project\crm_project\clientmanager.h(16): warning C4091: 'static ' : ignored on left of 'ClientManager' when no variable is declared
+     1>c:\users\sanke\documents\github\sfwrtech-3pr3-final-project---crm\crm_project\crm_project\companymanager.h(16): warning C4091: 'static ' : ignored on left of 'CompanyManager' when no variable is declared
+     1>c:\users\sanke\documents\github\sfwrtech-3pr3-final-project---crm\crm_project\crm_project\customerservicemanager.h(16): warning C4091: 'static ' : ignored on left of 'CustomerServiceManager' when no variable is declared
+     1>c:\users\sanke\documents\github\sfwrtech-3pr3-final-project---crm\crm_project\crm_project\dbmanager.h(32): warning C4091: 'static ' : ignored on left of 'DBManager' when no variable is declared
+         Generating Code...
+         Skipping... (no relevant changes detected)
+         CustomerServiceManager.cpp
+         CompanyManager.cpp
+         ClientManager.cpp
+         CaseManager.cpp
+     1>Done Building Project "C:\Users\sanke\Documents\GitHub\Sfwrtech-3PR3-Final-Project---CRM\CRM_Project\CRM_Project\CRM_Project.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:01.45
