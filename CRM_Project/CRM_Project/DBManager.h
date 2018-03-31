@@ -9,7 +9,7 @@
 
 static class DBManager
 {
-	const char* DB_PATH = "crm.db"; //sqlite file
+	const char* DBManager::DB_PATH;
 	static sqlite3* db;
 
 	static int GetCaseCallback(void* data, int count, char** rows, char**);

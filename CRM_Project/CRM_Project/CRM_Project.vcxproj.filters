@@ -81,4 +81,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="crm.db">
+      <Filter>Resource Files</Filter>
+    </None>
+  </ItemGroup>
 </Project>

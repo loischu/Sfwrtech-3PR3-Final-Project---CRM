@@ -28,7 +28,7 @@ void ClientManager::AddClient(Client c)
 		<< c.get_title()
 		<< c.get_name() << "','"
 		<< c.get_emailAddress() << "','"
-		<< c.get_phoneNumber << "',"
+		<< c.get_phoneNumber() << "',"
 		<< c.get_physicalAddress() << "','"
 		<< c.get_notes() << "')";
 
