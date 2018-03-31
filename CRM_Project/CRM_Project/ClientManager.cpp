@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include <sstream>
+#include <vector>
 #include "ClientManager.h"
 #include "sqlite3.h"
 #include "DBManager.h"
@@ -43,7 +44,7 @@ void ClientManager::UpdateClient(Client c)
 
 	ostringstream oss;
 
-	oss << " SET title = '" << c.c.get_title() << "',"
+	oss << " SET title = '" << c.get_title() << "',"
 		<< "	 name	 = '" << c.get_name() << "',"
 		<< "	 email_address = '" << c.get_emailAddress() << "',"
 		<< "	phone_number = '" << c.get_phoneNumber() << ","
@@ -62,8 +63,8 @@ Client ClientManager::GetClient(string ClientId)
 	return c;
 }
 
-Client * ClientManager::GetClients(string keyword)
+vector<Client> ClientManager::GetClients(string keyword)
 {
-	sqlite3* db;
-	return nullptr;
+	vector<Client> clients = DBManager::GetClientsByKeyword(keyword);
+	return clients;
 }

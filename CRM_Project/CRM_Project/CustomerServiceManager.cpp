@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include <sstream>
+#include <vector>
 #include "CustomerServiceManager.h"
 #include "sqlite3.h"
 #include "DBManager.h"
@@ -48,12 +49,12 @@ void CustomerServiceManager::UpdateCustomerService(CustomerService c)
 
 CustomerService CustomerServiceManager::GetCustomerService(string CustomerServiceId)
 {
-	CustomerService c = DBManager::GetCustomerService(CustomerServiceId);
+	CustomerService c = DBManager::GetRepresentative(CustomerServiceId);
 	return c;
 }
 
-CustomerService * CustomerServiceManager::GetCompanies(string keyword)
+vector<CustomerService> CustomerServiceManager::GetRepresentatives(string keyword)
 {
-	sqlite3* db;
-	return nullptr;
+	vector<CustomerService> reps = DBManager::GetRepresentativesByKeyword(keyword);
+	return reps;
 }

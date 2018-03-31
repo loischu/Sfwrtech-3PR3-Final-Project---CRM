@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include <sstream>
+#include <vector>
 #include "CompanyManager.h"
 #include "sqlite3.h"
 #include "DBManager.h"
@@ -55,8 +56,9 @@ Company CompanyManager::GetCompany(string CompanyId)
 	return c;
 }
 
-Company * CompanyManager::GetCompanies(string keyword)
+vector<Company> CompanyManager::GetCompanies(string keyword)
 {
-	sqlite3* db;
-	return nullptr;
+	vector<Company> companies = DBManager::GetCompaniesByKeyword(keyword);
+	return companies;
+
 }

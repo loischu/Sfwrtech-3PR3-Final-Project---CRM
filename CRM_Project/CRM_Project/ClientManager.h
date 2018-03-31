@@ -1,5 +1,6 @@
 #pragma once
 #include "Client.h"
+#include <vector>
 
 static class ClientManager
 {
@@ -10,7 +11,7 @@ public:
 	void AddClient(Client c);
 	void UpdateClient(Client c);
 	Client GetClient(std::string ClientId);
-	Client* GetClients(std::string keyword);
+	std::vector<Client> GetClients(std::string keyword);
 
 
 };

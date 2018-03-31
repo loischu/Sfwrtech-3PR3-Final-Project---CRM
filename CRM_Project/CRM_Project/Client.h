@@ -51,6 +51,11 @@ void Client::set_clientId(std::string s)
 	clientId = s;
 }
 
+void Client::set_companyId(std::string s) 
+{
+	companyId = s;
+}
+
 void Client::set_name(std::string s)
 {
 	name = s;
@@ -86,6 +91,11 @@ void Client::set_notes(std::string s)
 std::string Client::get_clientId()
 {
 	return clientId;
+}
+
+std::string Client::get_companyId()
+{
+	return companyId;
 }
 
 std::string Client::get_name()

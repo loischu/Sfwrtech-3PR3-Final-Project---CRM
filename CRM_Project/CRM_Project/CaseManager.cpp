@@ -55,8 +55,8 @@ Case CaseManager::GetCase(string CaseId)
 	return c;
 }
 
-Case * CaseManager::GetCases(string keyword)
+vector<Case> CaseManager::GetCases(string keyword)
 {
-	sqlite3* db;
-	return nullptr;
+	vector<Case> cases = DBManager::GetCasesByKeyword(keyword);
+	return cases;
 }

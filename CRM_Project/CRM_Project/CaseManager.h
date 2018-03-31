@@ -1,5 +1,6 @@
 #pragma once
 #include "Case.h"
+#include <vector>
 
 static class CaseManager
 {
@@ -10,7 +11,7 @@ public:
 	void AddCase(Case c);
 	void UpdateCase(Case c);
 	Case GetCase(std::string CaseId);
-	Case* GetCases(std::string keyword);
+	std::vector<Case> GetCases(std::string keyword);
 
 
 };
