@@ -11,6 +11,8 @@ DBManager::DBManager()
 {
 	int rc;
 
+	DB_PATH = "crm.db";
+
 	rc = sqlite3_open(DB_PATH, &db);
 
 	if (rc != SQLITE_OK) {
@@ -168,10 +170,9 @@ Case DBManager::GetCase(string id)
 {
 	Case c;
 
-	const char* sql = strcat("SELECT * FROM Cases WHERE case_id = ", id.c_str());
+	string sql = "SELECT * FROM Cases WHERE case_id = '" + id + "'";
 
-	sqlite3_stmt* stmt;
-	sqlite3_exec(db, sql, GetCaseCallback, &c, NULL);	
+	sqlite3_exec(db, sql.c_str(), GetCaseCallback, &c, NULL);	
 	
 	return c;
 }
@@ -180,10 +181,9 @@ Client DBManager::GetClient(string id)
 {
 	Client c;
 
-	const char* sql = strcat("SELECT * FROM Clients WHERE client_id = ", id.c_str());
+	string sql = "SELECT * FROM Clients WHERE client_id = '" + id + "'";
 
-	sqlite3_stmt* stmt;
-	sqlite3_exec(db, sql, GetClientCallback, &c, NULL);
+	sqlite3_exec(db, sql.c_str(), GetClientCallback, &c, NULL);
 
 	return c;
 }
@@ -192,10 +192,9 @@ Company DBManager::GetCompany(string id)
 {
 	Company c;
 
-	const char* sql = strcat("SELECT * FROM Companies WHERE company_id = ", id.c_str());
+	string sql = "SELECT * FROM Companies WHERE company_id = '" +id + "'";
 
-	sqlite3_stmt* stmt;
-	sqlite3_exec(db, sql, GetCompanyCallback, &c, NULL);
+	sqlite3_exec(db, sql.c_str(), GetCompanyCallback, &c, NULL);
 
 	return c;
 }
@@ -204,10 +203,9 @@ CustomerService DBManager::GetRepresentative(string id)
 {
 	CustomerService c;
 
-	const char* sql = strcat("SELECT * FROM customer_service_representative WHERE rep_ID = ", id.c_str());
+	string sql = "SELECT * FROM customer_service_representative WHERE rep_ID = '" + id + "'";
 
-	sqlite3_stmt* stmt;
-	sqlite3_exec(db, sql, GetCustomerServiceCallback, &c, NULL);
+	sqlite3_exec(db, sql.c_str(), GetCustomerServiceCallback, &c, NULL);
 
 	return c;
 }
@@ -301,6 +299,7 @@ vector<Client> DBManager::GetClientsByKeyword(string keyword)
 		cerr << "SELECT failed: " << sqlite3_errmsg(db) << endl;
 	}
 	sqlite3_finalize(stmt);
+	return clients;
 }
 
 vector<Company> DBManager::GetCompaniesByKeyword(string keyword)
