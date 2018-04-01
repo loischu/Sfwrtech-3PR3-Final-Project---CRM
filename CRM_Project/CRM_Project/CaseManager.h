@@ -2,7 +2,7 @@
 #include "Case.h"
 #include <vector>
 
-static class CaseManager
+class CaseManager
 {
 public:
 	CaseManager();

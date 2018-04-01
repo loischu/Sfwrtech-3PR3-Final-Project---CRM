@@ -2,7 +2,7 @@
 #include "CustomerService.h"
 #include <vector>
 
-static class CustomerServiceManager
+class CustomerServiceManager
 {
 public:
 	CustomerServiceManager();

@@ -2,7 +2,7 @@
 #include "Company.h"
 #include <vector>
 
-static class CompanyManager
+class CompanyManager
 {
 public:
 	CompanyManager();

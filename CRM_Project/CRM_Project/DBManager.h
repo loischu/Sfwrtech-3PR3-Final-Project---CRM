@@ -7,7 +7,7 @@
 #include "Company.h"
 #include "CustomerService.h"
 
-static class DBManager
+class DBManager
 {
 	const char* DBManager::DB_PATH;
 	static sqlite3* db;

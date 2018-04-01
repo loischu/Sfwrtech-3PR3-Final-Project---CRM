@@ -2,7 +2,7 @@
 #include "Client.h"
 #include <vector>
 
-static class ClientManager
+class ClientManager
 {
 public:
 	ClientManager();
