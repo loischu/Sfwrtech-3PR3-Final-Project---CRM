@@ -10,8 +10,8 @@ public:
 
 	void AddClient(Client c);
 	void UpdateClient(Client c);
-	Client GetClient(std::string ClientId);
-	std::vector<Client> GetClients(std::string keyword);
+	Client GetClient(string ClientId);
+	vector<Client> GetClients(string keyword);
 
 
 };

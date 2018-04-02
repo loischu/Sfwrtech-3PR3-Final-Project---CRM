@@ -27,15 +27,15 @@ public:
 
 	static void executeSQL(const char* sql);
 
-	static Case GetCase(std::string id);
-	static Client GetClient(std::string id);
-	static Company GetCompany(std::string id);
-	static CustomerService GetRepresentative(std::string id);
+	static Case GetCase(string id);
+	static Client GetClient(string id);
+	static Company GetCompany(string id);
+	static CustomerService GetRepresentative(string id);
 
-	static std::vector<Case> GetCasesByKeyword(std::string keyword);
-	static std::vector<Client> GetClientsByKeyword(std::string keyword);
-	static std::vector<Company> GetCompaniesByKeyword(std::string keyword);
-	static std::vector<CustomerService> GetRepresentativesByKeyword(std::string keyword);
+	static vector<Case> GetCasesByKeyword(string keyword);
+	static vector<Client> GetClientsByKeyword(string keyword);
+	static vector<Company> GetCompaniesByKeyword(string keyword);
+	static vector<CustomerService> GetRepresentativesByKeyword(string keyword);
 
 
 };

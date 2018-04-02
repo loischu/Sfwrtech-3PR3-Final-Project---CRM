@@ -10,8 +10,8 @@ public:
 
 	void AddCompany(Company c);
 	void UpdateCompany(Company c);
-	Company GetCompany(std::string CompanyId);
-	std::vector<Company> GetCompanies(std::string keyword);
+	Company GetCompany(string CompanyId);
+	vector<Company> GetCompanies(string keyword);
 
 
 };

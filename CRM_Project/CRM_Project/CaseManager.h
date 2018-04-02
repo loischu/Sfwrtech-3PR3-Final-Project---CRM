@@ -10,8 +10,8 @@ public:
 
 	void AddCase(Case c);
 	void UpdateCase(Case c);
-	Case GetCase(std::string CaseId);
-	std::vector<Case> GetCases(std::string keyword);
+	Case GetCase(string CaseId);
+	vector<Case> GetCases(string keyword);
 
 
 };

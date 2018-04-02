@@ -4,34 +4,34 @@
 class Client
 {
 protected:
-	std::string clientId;
-	std::string companyId;
-	std::string name;
-	std::string title;
-	std::string emailAddress;
-	std::string phoneNumber;
-	std::string physicalAddress;
-	std::string notes;
+	string clientId;
+	string companyId;
+	string name;
+	string title;
+	string emailAddress;
+	string phoneNumber;
+	string physicalAddress;
+	string notes;
 public:
 	Client();
 	~Client();
-	void set_clientId(std::string s);
-	void set_companyId(std::string s);
-	void set_name(std::string s);
-	void set_title(std::string s);
-	void set_emailAddress(std::string s);
-	void set_phoneNumber(std::string s);
-	void set_physicalAddress(std::string s);
-	void set_notes(std::string s);
+	void set_clientId(string s);
+	void set_companyId(string s);
+	void set_name(string s);
+	void set_title(string s);
+	void set_emailAddress(string s);
+	void set_phoneNumber(string s);
+	void set_physicalAddress(string s);
+	void set_notes(string s);
 
-	std::string get_clientId();
-	std::string get_companyId();
-	std::string get_name();
-	std::string get_title();
-	std::string get_emailAddress();
-	std::string get_phoneNumber();
-	std::string get_physicalAddress();
-	std::string get_notes();
+	string get_clientId();
+	string get_companyId();
+	string get_name();
+	string get_title();
+	string get_emailAddress();
+	string get_phoneNumber();
+	string get_physicalAddress();
+	string get_notes();
 };
 
 Client::Client()
@@ -46,41 +46,41 @@ Client::~Client()
 
 //Setters
 
-void Client::set_clientId(std::string s)
+void Client::set_clientId(string s)
 {
 	clientId = s;
 }
 
-void Client::set_companyId(std::string s) 
+void Client::set_companyId(string s) 
 {
 	companyId = s;
 }
 
-void Client::set_name(std::string s)
+void Client::set_name(string s)
 {
 	name = s;
 }
 
-void Client::set_title(std::string s)
+void Client::set_title(string s)
 {
 	title = s;
 }
-void Client::set_emailAddress(std::string s)
+void Client::set_emailAddress(string s)
 {
 	emailAddress = s;
 }
 
-void Client::set_phoneNumber(std::string s)
+void Client::set_phoneNumber(string s)
 {
 	phoneNumber = s;
 }
 
-void Client::set_physicalAddress(std::string s)
+void Client::set_physicalAddress(string s)
 {
 	physicalAddress = s;
 }
 
-void Client::set_notes(std::string s)
+void Client::set_notes(string s)
 {
 	notes = s;
 }
@@ -88,42 +88,42 @@ void Client::set_notes(std::string s)
 
 //Getters
 
-std::string Client::get_clientId()
+string Client::get_clientId()
 {
 	return clientId;
 }
 
-std::string Client::get_companyId()
+string Client::get_companyId()
 {
 	return companyId;
 }
 
-std::string Client::get_name()
+string Client::get_name()
 {
 	return name;
 }
 
-std::string Client::get_title()
+string Client::get_title()
 {
 	return title;
 }
 
-std::string Client::get_emailAddress()
+string Client::get_emailAddress()
 {
 	return emailAddress;
 }
 
-std::string Client::get_phoneNumber()
+string Client::get_phoneNumber()
 {
 	return phoneNumber;
 }
 
-std::string Client::get_physicalAddress()
+string Client::get_physicalAddress()
 {
 	return physicalAddress;
 }
 
-std::string Client::get_notes()
+string Client::get_notes()
 {
 	return notes;
 }

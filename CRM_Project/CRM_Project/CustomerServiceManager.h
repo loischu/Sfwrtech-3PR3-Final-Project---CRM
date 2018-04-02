@@ -10,8 +10,8 @@ public:
 
 	void AddCustomerService(CustomerService c);
 	void UpdateCustomerService(CustomerService c);
-	CustomerService GetCustomerService(std::string CustomerServiceId);
-	std::vector<CustomerService> GetRepresentatives(std::string keyword);
+	CustomerService GetCustomerService(string CustomerServiceId);
+	vector<CustomerService> GetRepresentatives(string keyword);
 
 
 };

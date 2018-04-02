@@ -4,19 +4,19 @@
 class CustomerService
 {
 protected:
-	std::string repId;
-	std::string companyId;
-	std::string name;
+	string repId;
+	string companyId;
+	string name;
 public:
 	CustomerService();
 	~CustomerService();
-	void set_repId(std::string s);
-	void set_companyId(std::string s);
-	void set_name(std::string s);
+	void set_repId(string s);
+	void set_companyId(string s);
+	void set_name(string s);
 
-	std::string get_repId();
-	std::string get_companyId();
-	std::string get_name();
+	string get_repId();
+	string get_companyId();
+	string get_name();
 };
 
 CustomerService::CustomerService()
@@ -31,17 +31,17 @@ CustomerService::~CustomerService()
 
 //Setters
 
-void CustomerService::set_repId(std::string s)
+void CustomerService::set_repId(string s)
 {
 	repId = s;
 }
 
-void CustomerService::set_companyId(std::string s)
+void CustomerService::set_companyId(string s)
 {
 	companyId = s;
 }
 
-void CustomerService::set_name(std::string s)
+void CustomerService::set_name(string s)
 {
 	name = s;
 }
@@ -49,17 +49,17 @@ void CustomerService::set_name(std::string s)
 
 //Getters
 
-std::string CustomerService::get_repId()
+string CustomerService::get_repId()
 {
 	return repId;
 }
 
-std::string CustomerService::get_companyId()
+string CustomerService::get_companyId()
 {
 	return companyId;
 }
 
-std::string CustomerService::get_name()
+string CustomerService::get_name()
 {
 	return name;
 }

@@ -3,28 +3,29 @@
 
 #include <string>
 
+using namespace std;
 class Case
 {
 protected:
-	std::string caseId;
-	std::string clientId;
-	std::string repId;
-	std::string details;
-	std::string type;
+	string caseId;
+	string clientId;
+	string repId;
+	string details;
+	string type;
 public:
 	Case();
 	~Case();
-	void set_caseId(std::string id);
-	void set_clientId(std::string s);
-	void set_repId(std::string id);
-	void set_details(std::string s);
-	void set_type(std::string s);
+	void set_caseId(string id);
+	void set_clientId(string s);
+	void set_repId(string id);
+	void set_details(string s);
+	void set_type(string s);
 
-	std::string get_caseId();
-	std::string get_clientId();
-	std::string get_repId();
-	std::string get_details();
-	std::string get_type();
+	string get_caseId();
+	string get_clientId();
+	string get_repId();
+	string get_details();
+	string get_type();
 };
 
 Case::Case()
@@ -39,51 +40,51 @@ Case::~Case()
 
 //Setters
 
-void Case::set_caseId(std::string s)
+void Case::set_caseId(string s)
 {
 	caseId = s;
 }
 
-void Case::set_clientId(std::string s)
+void Case::set_clientId(string s)
 {
 	clientId = s;
 }
 
-void Case::set_repId(std::string s)
+void Case::set_repId(string s)
 {
 	repId = s;
 }
 
-void Case::set_details(std::string s)
+void Case::set_details(string s)
 {
 	details = s;
 }
-void Case::set_type(std::string s)
+void Case::set_type(string s)
 {
 	type = s;
 }
 
 //Getters
 
-std::string Case::get_caseId()
+string Case::get_caseId()
 {
 	return caseId;
 }
 
-std::string Case::get_clientId()
+string Case::get_clientId()
 {
 	return clientId;
 }
 
-std::string Case::get_repId()
+string Case::get_repId()
 {
 	return repId;
 }
-std::string Case::get_details()
+string Case::get_details()
 {
 	return details;
 }
-std::string Case::get_type()
+string Case::get_type()
 {
 	return type;
 }
