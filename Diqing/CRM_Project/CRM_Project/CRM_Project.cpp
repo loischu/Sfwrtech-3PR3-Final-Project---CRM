@@ -1,5 +1,6 @@
 // CRM_Project.cpp : Defines the entry point for the console application.
-#include "stdafx.h"
+/* manager classes are created in vs 2012. It seems to cause linker error on vs 2013 on my machine.
+* commented for now
 #include "CaseManager.h"
 #include "ClientManager.h"
 #include "CompanyManager.h"
@@ -7,6 +8,14 @@
 #include "DBManager.h"
 #include "sqlite3.h"
 #include "sqlite3ext.h"
+* for now, directly use classes to demo
+*/
+#include "stdafx.h"
+#include "Case.h"
+#include "Client.h"
+#include "Company.h"
+#include "CustomerService.h"
+
 #include <iomanip>
 #include <iostream>
 

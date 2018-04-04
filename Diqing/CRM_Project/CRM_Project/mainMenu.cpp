@@ -1,5 +1,10 @@
 #include "stdafx.h"
+#include "Case.h"
+#include "Client.h"
+#include "Company.h"
+#include "CustomerService.h"
 #include <iostream>
+#include <vector>
 #include <cstdlib>
 
 
@@ -37,8 +42,63 @@ int choice3 = 3;
 char keyword[20];
 char repId[20];
 char company[20];
+Case c;
+Client cl;
+Company co;
+CustomerService cs;
+vector<Case> cVec;
+vector<Client> clVec;
+vector<Company> coVec;
 
 int main(int argc, char** argv) {
+	// make 10 of room
+	cVec.reserve(10);
+	clVec.reserve(10);
+	coVec.reserve(10);
+	// populate test data
+	// c
+	c.set_caseId("1");
+	c.set_clientId("1");
+	c.set_repId("1");
+	c.set_details("case 1 details");
+	c.set_type("report");
+	cVec.push_back(c);
+	c.set_caseId("2");
+	c.set_clientId("2");
+	c.set_repId("2");
+	c.set_details("case 1 details");
+	c.set_type("news");
+	cVec.push_back(c);
+	// cl
+	cl.set_companyId("1");
+	cl.set_clientId("1");
+	cl.set_name("Chris");
+	cl.set_title("Manager");
+	cl.set_emailAddress("chris@gmail.com");
+	cl.set_phoneNumber("2899924367");
+	cl.set_physicalAddress("180 Duke St");
+	cl.set_notes("None");
+	clVec.push_back(cl);
+	cl.set_companyId("1");
+	cl.set_clientId("1");
+	cl.set_name("Chris");
+	cl.set_title("Manager");
+	cl.set_emailAddress("chris@gmail.com");
+	cl.set_phoneNumber("2899924367");
+	cl.set_physicalAddress("180 Duke St");
+	cl.set_notes("None");
+	clVec.push_back(cl);
+	// co
+	co.set_companyId("1");
+	co.set_name("Google");
+	co.set_address("1 google drive");
+	co.set_sector("sector 1");
+	coVec.push_back(co);
+	co.set_companyId("1");
+	co.set_name("Apple");
+	co.set_address("1 apple drive");
+	co.set_sector("sector 2");
+	coVec.push_back(co);
 	// login
 	cout << "Welcome to CRM, Please register\n";
 	cout << "Please enter your ID: ";
@@ -143,7 +203,7 @@ void openExisting(void) {
 		// check keyword(caseID)
 		//keyword;
 		//if exist
-		if (!true){
+		if (keyword==c.get_caseId()){
 			caseDetail();
 		}
 		else{
@@ -162,11 +222,56 @@ void openExisting(void) {
 
 void createNew(void) {
 	createNewMenu();
-
 }
 
+void editCase(void) {
+	char res = 'N';
+	do {
+		editCaseMenu();
 
-void editClient(void) {
+		switch (choice3){
+
+		case 1:
+			char details[20];
+			// edit the detials here
+			do {
+				cout << "Please enter new details\n";
+				cin >> details;
+				cout << "Confirm change?(Y/N)";
+				cin >> res;
+			} while (res != 'Y');
+			//update
+			c.set_details(details);
+			editSaved();
+			break;
+
+		case 2:
+			char type[20];
+			// edit the type here
+			do {
+				cout << "Please enter new type\n";
+				cin >> type;
+				cout << "Confirm change?(Y/N)";
+				cin >> res;
+			} while (res != 'Y');
+			//update
+			c.set_type(type);
+			editSaved();
+			break;
+
+		case 3:
+			menu();
+			break;
+
+		default:
+			break;
+
+		}
+
+	} while (choice3 != 3);
+}
+
+void editCompany(void) {
 	char res = 'N';
 	do {
 		editClientMenu();
@@ -174,41 +279,44 @@ void editClient(void) {
 		switch (choice3){
 
 		case 1:
+			char name[20];
 			// edit the detials here
 			do {
-				char name[20];
 				cout << "Please enter new name\n";
 				cin >> name;
 				cout << "Confirm change?(Y/N)";
 				cin >> res;
 			} while (res != 'Y');
 			//update
+			co.set_name(name);
 			editSaved();
 			break;
 
 		case 2:
+			char address[20];
 			// edit the detials here
 			do {
-				char address[20];
 				cout << "Please enter new address\n";
 				cin >> address;
 				cout << "Confirm change?(Y/N)";
 				cin >> res;
 			} while (res != 'Y');
 			//update
+			co.set_address(address);
 			editSaved();
 			break;
 
 		case 3:
+			char sector[20];
 			// edit the detials here
 			do {
-				char sector[20];
 				cout << "Please enter new sector\n";
 				cin >> sector;
 				cout << "Confirm change?(Y/N)";
 				cin >> res;
 			} while (res != 'Y');
 			//update
+			co.set_sector(sector);
 			editSaved();
 			break; 
 
@@ -224,7 +332,7 @@ void editClient(void) {
 	} while (choice3 != 4);
 }
 
-void editCompany(void) {
+void editClient(void) {
 	char res = 'N';
 	do {
 		editCompanyMenu();
@@ -232,80 +340,86 @@ void editCompany(void) {
 		switch (choice3){
 
 		case 1:
+			char name[20];
 			// edit the name here
 			do {
-				char name[20];
 				cout << "Please enter new name\n";
 				cin >> name;
 				cout << "Confirm change?(Y/N)";
 				cin >> res;
 			} while (res != 'Y');
 			//update
+			cl.set_name(name);
 			editSaved();
 			break;
 
 		case 2:
+			char title[20];
 			// edit the title here
 			do {
-				char title[20];
 				cout << "Please enter new title\n";
 				cin >> title;
 				cout << "Confirm change?(Y/N)";
 				cin >> res;
 			} while (res != 'Y');
 			//update
+			cl.set_title(title);
 			editSaved();
 			break;
 
 		case 3:
+			char emailAddress[20];
 			// edit the email address here
 			do {
-				char emailAddress[20];
 				cout << "Please enter new email address\n";
 				cin >> emailAddress;
 				cout << "Confirm change?(Y/N)";
 				cin >> res;
 			} while (res != 'Y');
 			//update
+			cl.set_emailAddress(emailAddress);
 			editSaved();
 			break;
 
 		case 4:
+			char phoneNumber[20];
 			// edit the phone number here
 			do {
-				char phoneNumber[20];
 				cout << "Please enter new phone number\n";
 				cin >> phoneNumber;
 				cout << "Confirm change?(Y/N)";
 				cin >> res;
 			} while (res != 'Y');
 			//update
+			cl.set_phoneNumber(phoneNumber);
 			editSaved();
 			break;
 
 		case 5:
+			char physicalAddress[20];
 			// edit the physical address here
 			do {
-				char physicalAddress[20];
 				cout << "Please enter new physical address\n";
 				cin >> physicalAddress;
 				cout << "Confirm change?(Y/N)";
 				cin >> res;
 			} while (res != 'Y');
 			//update
+			cl.set_physicalAddress(physicalAddress);
 			editSaved();
 			break;
 
 		case 6:
+			char notes[20];
 			// edit the notes here
 			do {
-				char notes[20];
 				cout << "Please enter new email notes\n";
 				cin >> notes;
 				cout << "Confirm change?(Y/N)";
 				cin >> res;
 			} while (res != 'Y');
 			//update
+			cl.set_notes(notes);
 			editSaved();
 			break;
 
@@ -324,12 +438,19 @@ void editCompany(void) {
 // show detail of 1 case
 void showCaseDetail(void) {
 	// Case ID, Client Name, Representative Name and Representative Name
-	cout << "details\n";
+	cout << "-----------------Case Information begun-----------" << endl;
+	cout << "Case ID: " << c.get_caseId() << endl;
+	cout << "Client ID: " << c.get_clientId() << endl;
+	cout << "Representative ID: " << c.get_repId() << endl;
+	cout << "Details: " << c.get_details() << endl;
+	cout << "Type: " << c.get_type() << endl;
+	cout << "-----------------Case Information ends-----------" << endl;
 }
 
 // show list of objs after search and selection for one of them to edit
 void showCasesDetail(void) {
 	int res = 0;
+	Case p;
 	// Case ID, Client Name, Representative Name and Representative Name
 	cout << "details\n";
 	// selection part
@@ -530,6 +651,12 @@ void createNewMenu(void) {
 				cin >> physicalAddress;
 				cout << "Please enter the notes:";
 				cin >> notes;
+				cl.set_name(name);
+				cl.set_title(title);
+				cl.set_emailAddress(emailAddress);
+				cl.set_phoneNumber(phoneNumber);
+				cl.set_physicalAddress(physicalAddress);
+				cl.set_notes(notes);
 			}
 			else{
 				// else back to menu
@@ -549,6 +676,9 @@ void createNewMenu(void) {
 			cin >> address;
 			cout << "Please enter the sector:";
 			cin >> sector;
+
+			co.set_name(Cname);
+			co.set_address(address);
 
 			// client
 			char name[20];
@@ -570,6 +700,13 @@ void createNewMenu(void) {
 			cin >> physicalAddress;
 			cout << "Please enter the notes:";
 			cin >> notes;
+
+			cl.set_name(name);
+			cl.set_title(title);
+			cl.set_emailAddress(emailAddress);
+			cl.set_phoneNumber(phoneNumber);
+			cl.set_physicalAddress(physicalAddress);
+			cl.set_notes(notes);
 		}
 	}
 
@@ -580,6 +717,10 @@ void createNewMenu(void) {
 	cin >> type;
 	cout << "Please enter the detail:";
 	cin >> detail;
+	c.set_type(type);
+	c.set_details(detail);
+	c.set_clientId(cl.get_clientId);
+	c.set_repId(repId);
 
 	// success
 	cout << "Case created successfully and the case ID is 12.\nDo you want to create new record?(Y/N)";
@@ -606,50 +747,7 @@ void caseDetail(void) {
 }
 
 
-void editCase(void) {
-	char res = 'N';
-	do {
-		editCaseMenu();
 
-		switch (choice3){
-
-		case 1:
-			// edit the detials here
-			do {
-				char details[20];
-				cout << "Please enter new details\n";
-				cin >> details;
-				cout << "Confirm change?(Y/N)";
-				cin >> res;
-			} while (res != 'Y');
-			//update
-			editSaved();
-			break;
-
-		case 2:
-			// edit the type here
-			do {
-				char type[20];
-				cout << "Please enter new type\n";
-				cin >> type;
-				cout << "Confirm change?(Y/N)";
-				cin >> res;
-			} while (res != 'Y');
-			//update
-			editSaved();
-			break;
-
-		case 3:
-			menu();
-			break;
-
-		default:
-			break;
-
-		}
-
-	} while (choice3 != 3);
-}
 
 
 

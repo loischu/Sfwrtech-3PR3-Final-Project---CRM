@@ -81,14 +81,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Case.h" />
-    <ClInclude Include="CaseManager.h" />
     <ClInclude Include="Client.h" />
-    <ClInclude Include="ClientManager.h" />
     <ClInclude Include="Company.h" />
-    <ClInclude Include="CompanyManager.h" />
     <ClInclude Include="CustomerService.h" />
-    <ClInclude Include="CustomerServiceManager.h" />
-    <ClInclude Include="DBManager.h" />
     <ClInclude Include="sqlite3.h" />
     <ClInclude Include="sqlite3ext.h" />
     <ClInclude Include="stdafx.h" />
@@ -96,15 +91,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Case.cpp" />
-    <ClCompile Include="CaseManager.cpp" />
     <ClCompile Include="Client.cpp" />
-    <ClCompile Include="ClientManager.cpp" />
     <ClCompile Include="Company.cpp" />
-    <ClCompile Include="CompanyManager.cpp" />
     <ClCompile Include="CRM_Project.cpp" />
     <ClCompile Include="CustomerService.cpp" />
-    <ClCompile Include="CustomerServiceManager.cpp" />
-    <ClCompile Include="DBManager.cpp" />
     <ClCompile Include="mainMenu.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
