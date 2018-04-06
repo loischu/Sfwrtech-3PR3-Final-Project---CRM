@@ -19,7 +19,10 @@ void createNew();
 void caseDetail();
 void editCase();
 void editClient();
-void editCompany(); 
+void editCompany();
+void editCaseMenu();
+void editClientMenu();
+void editCompanyMenu();
 void showCompanysDetail();
 void showClientsDetail();
 void showCasesDetail();
@@ -80,12 +83,12 @@ int main(int argc, char** argv) {
 	cl.set_notes("None");
 	clVec.push_back(cl);
 	cl.set_companyId("1");
-	cl.set_clientId("1");
-	cl.set_name("Chris");
+	cl.set_clientId("2");
+	cl.set_name("Joe");
 	cl.set_title("Manager");
-	cl.set_emailAddress("chris@gmail.com");
-	cl.set_phoneNumber("2899924367");
-	cl.set_physicalAddress("180 Duke St");
+	cl.set_emailAddress("joe@gmail.com");
+	cl.set_phoneNumber("2899924397");
+	cl.set_physicalAddress("180 Bay St");
 	cl.set_notes("None");
 	clVec.push_back(cl);
 	// co
@@ -94,7 +97,7 @@ int main(int argc, char** argv) {
 	co.set_address("1 google drive");
 	co.set_sector("sector 1");
 	coVec.push_back(co);
-	co.set_companyId("1");
+	co.set_companyId("2");
 	co.set_name("Apple");
 	co.set_address("1 apple drive");
 	co.set_sector("sector 2");
@@ -159,29 +162,40 @@ void search(void) {
 		case 1:
 			searchInput();
 			// search
-			// if have res
-			showCasesDetail();
-			editClient();
-			// else
-			searchFail();
+			if (true){
+				// if have res
+				showCasesDetail();
+			}
+			else{
+				// else
+				searchFail();
+			}
 			break;
 
 		case 2:
 			searchInput();
 			// search
-			// if have res
-			showClientsDetail();
-			// else
-			searchFail();
+			if (true){
+				// if have res
+				showClientsDetail();
+			}
+			else{
+				// else
+				searchFail();
+			}
 			break;
 
 		case 3:
 			searchInput();
 			// search
-			// if have res
-			showCompanysDetail();
-			// else
-			searchFail();
+			if (true){
+				// if have res
+				showCompanysDetail();
+			}
+			else{
+				// else
+				searchFail();
+			}
 			break;
 
 		case 4:
@@ -274,7 +288,7 @@ void editCase(void) {
 void editCompany(void) {
 	char res = 'N';
 	do {
-		editClientMenu();
+		editCompanyMenu();
 
 		switch (choice3){
 
@@ -335,7 +349,7 @@ void editCompany(void) {
 void editClient(void) {
 	char res = 'N';
 	do {
-		editCompanyMenu();
+		editClientMenu();
 
 		switch (choice3){
 
@@ -447,12 +461,38 @@ void showCaseDetail(void) {
 	cout << "-----------------Case Information ends-----------" << endl;
 }
 
+// show detail of 1 Client
+void showClientDetail(void) {
+	cout << "-----------------Client Information begun-----------" << endl;
+	cout << "Company ID: " << cl.get_companyId() << endl;
+	cout << "Client ID: " << cl.get_clientId() << endl;
+	cout << "Name: " << cl.get_name() << endl;
+	cout << "Title: " << cl.get_title() << endl;
+	cout << "Email Address: " << cl.get_emailAddress() << endl;
+	cout << "Phone Number: " << cl.get_phoneNumber() << endl;
+	cout << "Physical address: " << cl.get_physicalAddress() << endl;
+	cout << "Notes: " << cl.get_notes() << endl;
+	cout << "-----------------Client Information ends-----------" << endl;
+}
+
+// show detail of 1 Company
+void showCompanyDetail(void) {
+	cout << "-----------------Company Information begun-----------" << endl;
+	cout << "Company ID: " << co.get_companyId() << endl;
+	cout << "Company Name: " << co.get_name() << endl;
+	cout << "Company Address: " << co.get_address() << endl;
+	cout << "Sector: " << co.get_sector() << endl;
+	cout << "-----------------Company Information ends-----------" << endl;
+}
+
 // show list of objs after search and selection for one of them to edit
 void showCasesDetail(void) {
 	int res = 0;
 	Case p;
 	// Case ID, Client Name, Representative Name and Representative Name
-	cout << "details\n";
+	for (std::vector<Case>::iterator it = cVec.begin(); it != cVec.end(); ++it) {
+		cout << it->get_caseId() + " - " + it->get_clientId() + " - " + it->get_repId() + " - " + it->get_type() + "\n";
+	}
 	// selection part
 	cout << "please select one to edit or 0 to go back to menu\n";
 	cin >> res;
@@ -460,13 +500,22 @@ void showCasesDetail(void) {
 		menu();
 	}
 	else{
+		// set the case to edit
+		c.set_caseId("1");
+		c.set_clientId("1");
+		c.set_repId("1");
+		c.set_details("case 1 details");
+		c.set_type("report");
+		showCaseDetail();
 		editCase();
 	}
 }
 void showClientsDetail(void) {
 	int res = 0;
 	// Client Name, Title and associated Company Name
-	cout << "details\n";
+	for (std::vector<Client>::iterator it = clVec.begin(); it != clVec.end(); ++it) {
+		cout << it->get_clientId() + " - " + it->get_name() + " - " + it->get_companyId() + "\n";
+	}
 	// selection part
 	cout << "please select one to edit or 0 to go back to menu\n";
 	cin >> res;
@@ -474,13 +523,25 @@ void showClientsDetail(void) {
 		menu();
 	}
 	else{
+		cl.set_companyId("1");
+		cl.set_clientId("1");
+		cl.set_name("Chris");
+		cl.set_title("Manager");
+		cl.set_emailAddress("chris@gmail.com");
+		cl.set_phoneNumber("2899924367");
+		cl.set_physicalAddress("180 Duke St");
+		cl.set_notes("None");
+		clVec.push_back(cl);
+		showClientDetail();
 		editClient();
 	}
 }
 void showCompanysDetail(void) {
 	int res = 0;
 	// company name and sector
-	cout << "details";
+	for (std::vector<Company>::iterator it = coVec.begin(); it != coVec.end(); ++it) {
+		cout << it->get_companyId() + " - " + it->get_name() + " - " + it->get_sector() + "\n";
+	}
 	// selection part
 	cout << "please select one to edit or 0 to go back to menu\n";
 	cin >> res;
@@ -488,6 +549,12 @@ void showCompanysDetail(void) {
 		menu();
 	}
 	else{
+		co.set_companyId("1");
+		co.set_name("Google");
+		co.set_address("1 google drive");
+		co.set_sector("sector 1");
+		coVec.push_back(co);
+		showCompanyDetail();
 		editCompany();
 	}
 }
@@ -613,11 +680,11 @@ void createNewMenu(void) {
 	cout << "Is it for an existing client(Y/N)";
 	cin >> res;
 	if (res == 'Y'){
-		char client[20];
+		string client;
 		cout << "Please enter the client ID:";
 		cin >> client;
 		//check client and company
-		if (true){
+		if (client == cl.get_clientId()){
 			cout << "The client and your company exists.\n";
 		}
 		else{
@@ -631,7 +698,7 @@ void createNewMenu(void) {
 		cin >> res;
 		if (res == 'Y'){
 			//check company
-			if (true){
+			if (co.get_name() == company){
 				char name[20];
 				char title[20];
 				char emailAddress[20];
@@ -657,6 +724,8 @@ void createNewMenu(void) {
 				cl.set_phoneNumber(phoneNumber);
 				cl.set_physicalAddress(physicalAddress);
 				cl.set_notes(notes);
+				// add to vector
+				clVec.push_back(cl);
 			}
 			else{
 				// else back to menu
@@ -679,6 +748,8 @@ void createNewMenu(void) {
 
 			co.set_name(Cname);
 			co.set_address(address);
+			// add to vector
+			coVec.push_back(co);
 
 			// client
 			char name[20];
@@ -707,6 +778,8 @@ void createNewMenu(void) {
 			cl.set_phoneNumber(phoneNumber);
 			cl.set_physicalAddress(physicalAddress);
 			cl.set_notes(notes);
+			// add to vector
+			clVec.push_back(cl);
 		}
 	}
 
@@ -719,8 +792,10 @@ void createNewMenu(void) {
 	cin >> detail;
 	c.set_type(type);
 	c.set_details(detail);
-	c.set_clientId(cl.get_clientId);
+	c.set_clientId(cl.get_clientId());
 	c.set_repId(repId);
+	// add to vector
+	cVec.push_back(c);
 
 	// success
 	cout << "Case created successfully and the case ID is 12.\nDo you want to create new record?(Y/N)";
