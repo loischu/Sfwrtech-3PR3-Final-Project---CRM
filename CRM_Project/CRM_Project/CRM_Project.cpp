@@ -17,12 +17,15 @@
 using namespace std;
 
 
-int _tmain(int argc, _TCHAR* argv[])
-{
+
+int getChoice(){
+
+
+}
+
+bool createCase(){
+
 	Case c;
-	Client cl;
-	Company co;
-	CustomerService cs;
 
 	//case object --------------begin-----------------
 	string caseid, cl_id, repid, details,type;
@@ -51,20 +54,19 @@ int _tmain(int argc, _TCHAR* argv[])
 	cout << "Type: " << c.get_type() << endl;
 	cout << "-----------------Case Information ends-----------"<< endl;
 	//case object --------------end-----------------
+	return false;
+}
 
+bool createClient(){
+
+	Client cl;
 	//client object --------------begin-----------------
-	string companyId;
-	string name;
-	string title;
-	string emailAddress;
-	string phoneNumber;
-	string physicalAddress;
-	string notes;
+	string companyId, clientid, name, title, emailAddress, phoneNumber, physicalAddress, notes;
 
 	cout << "please enter company id: " ;
 	cin >> companyId;
 	cout << "please enter Client id: " ;
-	cin >> cl_id;
+	cin >> clientid;
 	cout << "please enter name: " ;
 	cin >> name;
 	getline(cin, name);
@@ -83,7 +85,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 
 	cl.set_companyId(companyId);
-	cl.set_clientId(cl_id);
+	cl.set_clientId(clientid);
 	cl.set_name(name);
 	cl.set_title(title);
 	cl.set_emailAddress(emailAddress);
@@ -102,10 +104,13 @@ int _tmain(int argc, _TCHAR* argv[])
 	cout << "Notes: " << cl.get_notes() << endl;
 	cout << "-----------------Client Information ends-----------"<< endl;
 	//client object --------------end-----------------
+	return false;
+}
+
+bool createCompany(){
+	Company co;
 	//Company object items -------------------begin----------------
-	string company_name;
-	string company_address;
-	string sector;
+	string companyId, company_name, company_address, sector;
 
 	cout << "please enter company id: " ;
 	cin >> companyId;
@@ -130,6 +135,13 @@ int _tmain(int argc, _TCHAR* argv[])
 	cout << "Sector: " << co.get_sector() << endl;
 	cout << "-----------------Company Information ends-----------"<< endl;
 	//Company object items -------------------ends----------------
+	return false;
+}
+
+bool createCustomerServices(){
+	CustomerService cs;
+
+	string companyId, repid, name;
 
 	//Customer service object items -------------------begin----------------
 	cout << "please enter company id: " ;
@@ -151,7 +163,49 @@ int _tmain(int argc, _TCHAR* argv[])
 	cout << "Name: " << cs.get_name() << endl;
 	cout << "-----------------Customer Service Information ends-----------"<< endl;
 	//Customer Service object items -------------------ends----------------
+	return false;
+}
 
+int _tmain(int argc, _TCHAR* argv[])
+{
+
+	cout << "Welcome to CRM 2018" << endl;
+
+	int choice = 0;
+
+	while(choice < 1 && choice > 4){
+
+		cout << "Please select from the following options: " << endl;
+
+		cout << "1) Create a new Case\n" 
+			<< "2) Create a new Client\n"
+			<< "3) Create a new Company\n" 
+			<< "4) Quit" << endl;
+
+		cin >> choice;
+		cin.get();
+
+
+		switch (choice)
+		{
+		case 1:
+			createCase();
+			break;
+		case 2:
+			createClient();
+			break;
+		case 3:
+			createCompany();
+			break;
+		case 4:
+			return 0;
+			break;
+		default:
+			break;
+		}
+
+
+	}
 
 	system("pause");
 
