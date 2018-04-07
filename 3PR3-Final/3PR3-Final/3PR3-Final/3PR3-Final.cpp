@@ -13,7 +13,7 @@
   (and mysql_connection.h). This will reduce your build time!
 */
 #include "mysql_connection.h"
-
+#include <mysql_driver.h>
 #include <cppconn/driver.h>
 #include <cppconn/exception.h>
 #include <cppconn/resultset.h>
@@ -24,12 +24,15 @@ using namespace std;
 using namespace std;
 int _tmain(int argc, _TCHAR* argv[])
 {
+cout << endl;
+cout << "Running SELECT * FROM dbo.`case`;" << endl;
+ 
 
+try {
   sql::Driver *driver;
   sql::Connection *con;
   sql::Statement *stmt;
   sql::ResultSet *res;
-  sql::PreparedStatement *pstmt;
 
   /* Create a connection */
   driver = get_driver_instance();
@@ -37,7 +40,26 @@ int _tmain(int argc, _TCHAR* argv[])
   /* Connect to the MySQL test database */
   con->setSchema("dbo");
 
+  stmt = con->createStatement();
+  res = stmt->executeQuery("SELECT * FROM dbo.`case`;"); // replace with your statement
+  while (res->next()) {
+  cout << ", details = '" << res->getString("details") << "'" << endl;
+    
+  }
+  delete res;
+  delete stmt;
+  delete con;
 
-return 0;
+} catch (sql::SQLException &e) {
+  cout << "# ERR: SQLException in " << __FILE__;
+  cout << "(" << __FUNCTION__ << ") on line " << endl;
+  cout << "# ERR: " << e.what();
+  cout << " (MySQL error code: " << e.getErrorCode();
+  cout << ", SQLState: " << e.getSQLState() << " )" << endl;
+}
+int h;
+cout << endl;
+cin >> h ;
+return EXIT_SUCCESS;
 }
 
