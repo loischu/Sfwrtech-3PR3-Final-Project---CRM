@@ -29,10 +29,11 @@ cout << "Running SELECT * FROM dbo.`case`;" << endl;
  
 
 try {
-  sql::Driver *driver;
+    sql::Driver *driver;
   sql::Connection *con;
   sql::Statement *stmt;
   sql::ResultSet *res;
+  sql::PreparedStatement *prep_stmt;
 
   /* Create a connection */
   driver = get_driver_instance();
@@ -46,8 +47,17 @@ try {
   cout << ", details = '" << res->getString("details") << "'" << endl;
     
   }
-  delete res;
+   delete res;
   delete stmt;
+//just for details in case table 
+  prep_stmt  = con->prepareStatement("INSERT INTO dbo.`case`(details) VALUES (?)");
+
+	prep_stmt->setString(1, "testing details info");
+	prep_stmt->execute();
+	cout << "insert executed";
+  delete prep_stmt ;
+
+
   delete con;
 
 } catch (sql::SQLException &e) {
