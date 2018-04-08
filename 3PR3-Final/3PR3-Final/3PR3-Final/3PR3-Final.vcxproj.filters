@@ -33,9 +33,6 @@
     <ClInclude Include="Representative.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Case.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Client.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -46,6 +43,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="RepresentativeManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Case.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
