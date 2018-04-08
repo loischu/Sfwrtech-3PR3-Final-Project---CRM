@@ -11,6 +11,7 @@ class Case
 	std::string type;
 
 public:
+
 	Case(void){}
 	~Case(void){}
 

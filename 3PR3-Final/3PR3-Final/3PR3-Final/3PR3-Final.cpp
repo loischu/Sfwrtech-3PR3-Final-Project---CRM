@@ -193,7 +193,7 @@ void openExisting(void) {
 		//keyword;
 		//if exist
 
-		if (keyword == (c.caseID())){
+		if (keyword == c.get_caseID()){
 		
 			caseDetail();
 		}
