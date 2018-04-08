@@ -92,7 +92,6 @@
     <ClInclude Include="ClientManager.h" />
     <ClInclude Include="Company.h" />
     <ClInclude Include="CompanyManager.h" />
-    <ClInclude Include="DBConnection.h" />
     <ClInclude Include="Representative.h" />
     <ClInclude Include="RepresentativeManager.h" />
     <ClInclude Include="stdafx.h" />
@@ -103,7 +102,6 @@
     <ClCompile Include="CaseManager.cpp" />
     <ClCompile Include="ClientManager.cpp" />
     <ClCompile Include="CompanyManager.cpp" />
-    <ClCompile Include="DBConnection.cpp" />
     <ClCompile Include="RepresentativeManager.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

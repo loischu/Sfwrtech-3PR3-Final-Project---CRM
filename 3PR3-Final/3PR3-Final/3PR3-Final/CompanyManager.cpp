@@ -92,7 +92,7 @@ Company CompanyManager::getCompany(int id){
 	sql::Connection *con;
 	sql::Statement *stmt;
 	sql::ResultSet *res;
-	sql::PreparedStatement *prep_stmt;
+//	sql::PreparedStatement *prep_stmt;
 
 	/* Create a connection */
 	driver = get_driver_instance();
@@ -133,7 +133,7 @@ vector<Company> CompanyManager::getCompanies(string keyword)
 	sql::Connection *con;
 	sql::Statement *stmt;
 	sql::ResultSet *res;
-	sql::PreparedStatement *prep_stmt;
+//	sql::PreparedStatement *prep_stmt;
 
 	/* Create a connection */
 	driver = get_driver_instance();

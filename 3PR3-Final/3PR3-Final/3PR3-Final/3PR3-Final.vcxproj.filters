@@ -48,9 +48,6 @@
     <ClInclude Include="RepresentativeManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="DBConnection.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -69,9 +66,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="RepresentativeManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="DBConnection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

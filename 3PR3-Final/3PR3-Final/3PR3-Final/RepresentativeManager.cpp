@@ -90,7 +90,7 @@ Representative GetRepresentative(int RepresentativeId){
 	sql::Connection *con;
 	sql::Statement *stmt;
 	sql::ResultSet *res;
-	sql::PreparedStatement *prep_stmt;
+//	sql::PreparedStatement *prep_stmt;
 
 	/* Create a connection */
 	driver = get_driver_instance();
@@ -129,7 +129,7 @@ vector<Representative> RepresentativeManager::GetRepresentatives(string keyword)
 	sql::Connection *con;
 	sql::Statement *stmt;
 	sql::ResultSet *res;
-	sql::PreparedStatement *prep_stmt;
+//	sql::PreparedStatement *prep_stmt;
 
 	/* Create a connection */
 	driver = get_driver_instance();
