@@ -9,8 +9,8 @@ class Company
 	std::string address;
 	std::string sector;
 public:
-	Company(void);
-	~Company(void);
+	Company(void){}
+	~Company(void){}
 
 	const int& get_companyId() const { return companyID; }
 	const std::string& get_name() const { return name; }
