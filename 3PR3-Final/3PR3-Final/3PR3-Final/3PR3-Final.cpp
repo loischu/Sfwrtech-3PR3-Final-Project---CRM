@@ -7,69 +7,56 @@
 #include <stdlib.h>
 #include <iostream>
 
+#include "Company.h"
+#include "CompanyManager.h"
+
 /*
-  Include directly the different
-  headers from cppconn/ and mysql_driver.h + mysql_util.h
-  (and mysql_connection.h). This will reduce your build time!
+Include directly the different
+headers from cppconn/ and mysql_driver.h + mysql_util.h
+(and mysql_connection.h). This will reduce your build time!
 */
-#include "mysql_connection.h"
-#include <mysql_driver.h>
-#include <cppconn/driver.h>
-#include <cppconn/exception.h>
-#include <cppconn/resultset.h>
-#include <cppconn/statement.h>
-#include <cppconn/prepared_statement.h>
+//#include "mysql_connection.h"
+//#include <mysql_driver.h>
+//#include <cppconn/driver.h>
+//#include <cppconn/exception.h>
+//#include <cppconn/resultset.h>
+//#include <cppconn/statement.h>
+//#include <cppconn/prepared_statement.h>
 
 using namespace std;
-using namespace std;
+
 int _tmain(int argc, _TCHAR* argv[])
 {
-cout << endl;
-cout << "Running SELECT * FROM dbo.`case`;" << endl;
- 
+	cout << endl;
+	Company c;
+	c.set_address("123 Fake St");
+	c.set_name("ROC, INC.");
+	c.set_sector("Clothing");
 
-try {
-    sql::Driver *driver;
-  sql::Connection *con;
-  sql::Statement *stmt;
-  sql::ResultSet *res;
-  sql::PreparedStatement *prep_stmt;
+	CompanyManager cm;
 
-  /* Create a connection */
-  driver = get_driver_instance();
-  con = driver->connect("tcp://127.0.0.1:3306", "root", "password");
-  /* Connect to the MySQL test database */
-  con->setSchema("dbo");
+	int id = cm.createCompany(c);
 
-  stmt = con->createStatement();
-  res = stmt->executeQuery("SELECT * FROM dbo.`case`;"); // replace with your statement
-  while (res->next()) {
-  cout << ", details = '" << res->getString("details") << "'" << endl;
-    
-  }
-   delete res;
-  delete stmt;
-//just for details in case table 
-  prep_stmt  = con->prepareStatement("INSERT INTO dbo.`case`(details) VALUES (?)");
+	cout<<"Company created with ID " << id <<endl;
 
-	prep_stmt->setString(1, "testing details info");
-	prep_stmt->execute();
-	cout << "insert executed";
-  delete prep_stmt ;
+	c.set_companyId(id);
+
+	cout<<"Updating Company..."<<endl;
+	c.set_address("345 Fake St");
+	c.set_sector("Private Security");
+
+	cm.updateCompany(c);
+	c = cm.getCompany(c.get_companyId());
+
+	cout << "New Company values:\n" <<endl;
+
+	cout << "Company Name: " << c.get_name() << endl;
+	cout << "Company Address: " << c.get_address() << endl;
+	cout << "Company Sector: " << c.get_sector() << endl;
 
 
-  delete con;
-
-} catch (sql::SQLException &e) {
-  cout << "# ERR: SQLException in " << __FILE__;
-  cout << "(" << __FUNCTION__ << ") on line " << endl;
-  cout << "# ERR: " << e.what();
-  cout << " (MySQL error code: " << e.getErrorCode();
-  cout << ", SQLState: " << e.getSQLState() << " )" << endl;
-}
-int h;
-cout << endl;
-cin >> h ;
-return EXIT_SUCCESS;
+	cout << endl;
+	cin.get();
+	return EXIT_SUCCESS;
 }
 
