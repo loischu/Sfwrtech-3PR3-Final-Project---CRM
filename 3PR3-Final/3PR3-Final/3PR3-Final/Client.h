@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef CLIENT_H
+#define CLIENT_H
 #include <string>
 class Client
 {
@@ -9,6 +9,7 @@ class Client
 	std::string clientName;
 	std::string emailAddress;
 	std::string phoneNumber;
+	std::string physicalAddress;
 	std::string Notes;
 public:
 	Client(void){}
@@ -19,6 +20,8 @@ public:
 	const std::string& get_title() const { return title; }
 	const std::string& get_clientName() const { return clientName; }
 	const std::string& get_emailAddress() const { return emailAddress; }
+	const std::string& get_physicalAddress() const { return physicalAddress; }
+	const std::string& get_phoneNumber() const { return phoneNumber; }
 	const std::string& get_Notes() const { return Notes; }
 
 	void set_clientId(int i) {clientID = i; }
@@ -26,8 +29,11 @@ public:
 	void set_title(std::string s) { title = s; }
 	void set_clientName(std::string s) { clientName= s; }
 	void set_emailAddress(std::string s) { emailAddress= s; }
+	void set_physicalAddress(std::string s) { physicalAddress= s; }
+	void set_phoneNumber(std::string s) { phoneNumber= s; }
 	void set_Notes(std::string s) { Notes= s; }
 
 
 };
 
+#endif

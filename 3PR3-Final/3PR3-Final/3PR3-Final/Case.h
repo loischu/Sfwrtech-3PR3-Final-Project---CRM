@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef CASE_H
+#define CASE_H
 #include <string>
 class Case
 {
@@ -28,4 +28,4 @@ public:
 
 
 };
-
+#endif

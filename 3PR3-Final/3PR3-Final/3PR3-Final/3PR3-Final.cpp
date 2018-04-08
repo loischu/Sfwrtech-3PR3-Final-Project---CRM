@@ -10,6 +10,9 @@
 #include "Company.h"
 #include "CompanyManager.h"
 
+#include "Client.h"
+#include "ClientManager.h"
+
 /*
 Include directly the different
 headers from cppconn/ and mysql_driver.h + mysql_util.h
@@ -27,6 +30,9 @@ using namespace std;
 
 int _tmain(int argc, _TCHAR* argv[])
 {
+
+
+
 	cout << endl;
 	Company c;
 	c.set_address("123 Fake St");

@@ -1,5 +1,5 @@
-#pragma once
 #ifndef COMPANY_MANAGER_H
+#define COMPANY_MANAGER_H
 #include <vector>
 #include <string>
 #include "Company.h"
@@ -18,5 +18,5 @@ public:
 
 };
 
-#define COMPANY_MANAGER_H
+
 #endif

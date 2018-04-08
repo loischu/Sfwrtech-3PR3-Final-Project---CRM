@@ -1,5 +1,5 @@
-#pragma once
-
+#ifndef COMPANY_H
+#define COMPANY_H
 #include <string>
 class Company
 {
@@ -25,3 +25,4 @@ public:
 
 };
 
+#endif
