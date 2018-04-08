@@ -132,3 +132,51 @@ void UpdateClient(Client c){
 	delete con;
 
 }
+vector<Client> ClientManager::GetClients(string keyword)
+{
+	vector<Client> clients;
+	Client curr;
+
+	sql::Driver *driver;
+	sql::Connection *con;
+	sql::Statement *stmt;
+	sql::ResultSet *res;
+	sql::PreparedStatement *prep_stmt;
+
+	/* Create a connection */
+	driver = get_driver_instance();
+	con = driver->connect("tcp://127.0.0.1:3306", "root", "password");
+	/* Connect to the database */
+	con->setSchema("dbo");
+
+	stmt = con->createStatement();
+
+	ostringstream oss;
+
+	string sql = "SELECT * FROM Client WHERE ";
+
+	oss << "Client_Name LIKE '%" << keyword << "%' OR "
+		<< "Address LIKE '%" << keyword << "%' OR "
+		<< "Sector LIKE '%" << keyword << "%';";
+
+	sql += oss.str();
+
+	res = stmt->executeQuery(sql);
+
+	while (res->next()){
+		curr.set_clientId(res->getInt("Client_ID"));
+		curr.set_title(res->getString("Title"));
+		curr.set_clientName(res->getString("Client_Name"));
+		curr.set_emailAddress(res->getString("Email_Address"));
+		curr.set_phoneNumber(res->getString("Phone_Number"));
+		curr.set_physicalAddress(res->getString("Physical_Address"));
+		curr.set_Notes(res->getString("Notes"));
+
+		clients.push_back(curr);
+	}
+
+	delete res;
+	delete stmt;
+
+	return clients;
+}

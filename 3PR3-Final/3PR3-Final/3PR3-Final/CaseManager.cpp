@@ -16,8 +16,6 @@ using namespace std;
 CaseManager::CaseManager(void)
 {
 }
-
-
 CaseManager::~CaseManager(void)
 {
 }
@@ -67,7 +65,7 @@ int AddCase(Case c){
 }
 
 void UpdateCase(Case c){
-			sql::Driver *driver;
+	sql::Driver *driver;
 	sql::Connection *con;
 	sql::PreparedStatement *prep_stmt;
 
@@ -90,7 +88,7 @@ void UpdateCase(Case c){
 }
 
 Case GetCase(int CaseId){
-		sql::Driver *driver;
+	sql::Driver *driver;
 	sql::Connection *con;
 	sql::Statement *stmt;
 	sql::ResultSet *res;
@@ -114,6 +112,8 @@ Case GetCase(int CaseId){
 
 	while (res->next()) {
 		c.set_caseID(res->getInt("Case_ID"));
+		c.set_clientID(res->getInt("Client_ID"));
+		c.set_repID(res->getInt("Rep_ID"));
 		c.set_details(res->getString("Details"));
 		c.set_type(res->getString("Type"));
 	}
@@ -123,4 +123,50 @@ Case GetCase(int CaseId){
 	delete con;
 
 	return c;
+}
+
+vector<Case> CaseManager::GetCases(string keyword)
+{
+	vector<Case> cases;
+	Case curr;
+
+	sql::Driver *driver;
+	sql::Connection *con;
+	sql::Statement *stmt;
+	sql::ResultSet *res;
+	sql::PreparedStatement *prep_stmt;
+
+	/* Create a connection */
+	driver = get_driver_instance();
+	con = driver->connect("tcp://127.0.0.1:3306", "root", "password");
+	/* Connect to the database */
+	con->setSchema("dbo");
+
+	stmt = con->createStatement();
+
+	ostringstream oss;
+
+	string sql = "SELECT * FROM Case WHERE ";
+
+	oss << "Details LIKE '%" << keyword << "%' OR "
+		<< "Type LIKE '%" << keyword << "%';";
+
+	sql += oss.str();
+
+	res = stmt->executeQuery(sql);
+
+	while (res->next()){
+		curr.set_caseID(res->getInt("Case_ID"));
+		curr.set_clientID(res->getInt("Client_ID"));
+		curr.set_repID(res->getInt("Rep_ID"));
+		curr.set_details(res->getString("Details"));
+		curr.set_type(res->getString("Type"));
+
+		cases.push_back(curr);
+	}
+
+	delete res;
+	delete stmt;
+
+	return cases;
 }

@@ -22,7 +22,7 @@ RepresentativeManager::~RepresentativeManager(void)
 {
 }
 
-int AddCustomerService(Representative c){
+int AddRepresentative(Representative c){
 	int id = 0;
 
 	sql::Driver *driver;
@@ -62,7 +62,7 @@ int AddCustomerService(Representative c){
 
 }
 
-void UpdateCustomerService(Representative c){
+void UpdateRepresentative(Representative c){
 	sql::Driver *driver;
 	sql::Connection *con;
 	sql::PreparedStatement *prep_stmt;
@@ -84,7 +84,7 @@ void UpdateCustomerService(Representative c){
 
 }
 
-Representative GetCustomerService(int CustomerServiceId){
+Representative GetRepresentative(int RepresentativeId){
 
 	sql::Driver *driver;
 	sql::Connection *con;
@@ -102,7 +102,7 @@ Representative GetCustomerService(int CustomerServiceId){
 
 	ostringstream oss;
 
-	oss << "SELECT * FROM customer_service_representative WHERE Rep_ID = " << CustomerServiceId;
+	oss << "SELECT * FROM customer_service_representative WHERE Rep_ID = " << RepresentativeId;
 
 	res = stmt->executeQuery(oss.str()); 
 
@@ -118,4 +118,48 @@ Representative GetCustomerService(int CustomerServiceId){
 	delete con;
 
 	return c;
+}
+
+vector<Representative> RepresentativeManager::GetRepresentatives(string keyword)
+{
+	vector<Representative> representatives;
+	Representative curr;
+
+	sql::Driver *driver;
+	sql::Connection *con;
+	sql::Statement *stmt;
+	sql::ResultSet *res;
+	sql::PreparedStatement *prep_stmt;
+
+	/* Create a connection */
+	driver = get_driver_instance();
+	con = driver->connect("tcp://127.0.0.1:3306", "root", "password");
+	/* Connect to the database */
+	con->setSchema("dbo");
+
+	stmt = con->createStatement();
+
+	ostringstream oss;
+
+	string sql = "SELECT * FROM Representative WHERE ";
+
+	oss << "Representative_Name LIKE '%" << keyword << "%' OR "
+		<< "Address LIKE '%" << keyword << "%' OR "
+		<< "Sector LIKE '%" << keyword << "%';";
+
+	sql += oss.str();
+
+	res = stmt->executeQuery(sql);
+
+	while (res->next()){
+		curr.set_repId(res->getInt("Rep_ID"));
+		curr.set_name(res->getString("Name"));
+
+		representatives.push_back(curr);
+	}
+
+	delete res;
+	delete stmt;
+
+	return representatives;
 }
