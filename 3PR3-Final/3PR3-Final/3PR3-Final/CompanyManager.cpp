@@ -17,7 +17,6 @@ CompanyManager::CompanyManager(void)
 {
 }
 
-
 CompanyManager::~CompanyManager(void)
 {
 }
@@ -123,4 +122,50 @@ Company CompanyManager::getCompany(int id){
 	delete con;
 
 	return c;
+}
+
+vector<Company> CompanyManager::getCompanies(string keyword)
+{
+	vector<Company> companies;
+	Company curr;
+
+	sql::Driver *driver;
+	sql::Connection *con;
+	sql::Statement *stmt;
+	sql::ResultSet *res;
+	sql::PreparedStatement *prep_stmt;
+
+	/* Create a connection */
+	driver = get_driver_instance();
+	con = driver->connect("tcp://127.0.0.1:3306", "root", "password");
+	/* Connect to the database */
+	con->setSchema("dbo");
+
+	stmt = con->createStatement();
+
+	ostringstream oss;
+
+	string sql = "SELECT * FROM Company WHERE ";
+
+	oss << "Company_Name LIKE '%" << keyword << "%' OR "
+		<< "Address LIKE '%" << keyword << "%' OR "
+		<< "Sector LIKE '%" << keyword << "%';";
+
+	sql += oss.str();
+
+	res = stmt->executeQuery(sql);
+
+	while (res->next()){
+		curr.set_companyId(res->getInt("Company_ID"));
+		curr.set_name(res->getString("Company_Name"));
+		curr.set_address(res->getString("Address"));
+		curr.set_sector(res->getString("Sector"));
+
+		companies.push_back(curr);
+	}
+
+	delete res;
+	delete stmt;
+
+	return companies;
 }

@@ -13,19 +13,6 @@
 #include "Client.h"
 #include "ClientManager.h"
 
-/*
-Include directly the different
-headers from cppconn/ and mysql_driver.h + mysql_util.h
-(and mysql_connection.h). This will reduce your build time!
-*/
-//#include "mysql_connection.h"
-//#include <mysql_driver.h>
-//#include <cppconn/driver.h>
-//#include <cppconn/exception.h>
-//#include <cppconn/resultset.h>
-//#include <cppconn/statement.h>
-//#include <cppconn/prepared_statement.h>
-
 using namespace std;
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -59,6 +46,20 @@ int _tmain(int argc, _TCHAR* argv[])
 	cout << "Company Name: " << c.get_name() << endl;
 	cout << "Company Address: " << c.get_address() << endl;
 	cout << "Company Sector: " << c.get_sector() << endl;
+
+	cout << "\nRetrieving all companies called ROC, Inc." << endl;
+
+	vector<Company> companies = cm.getCompanies("ROC");
+
+	vector<Company>::iterator it;
+
+	for(it=companies.begin();it!=companies.end();it++){
+
+		cout << "\nCompany Name: " << it->get_name() << endl;
+		cout << "Company Address: " << it->get_address() << endl;
+		cout << "Company Sector: " << it->get_sector() << endl;
+
+	}
 
 
 	cout << endl;

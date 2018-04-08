@@ -43,7 +43,7 @@ int AddClient(Client c){
 
 	prep_stmt->setString(1, c.get_title());
 	prep_stmt->setString(2, c.get_clientName());
-	prep_stmt->setString(3, c.get_emailAddress);
+	prep_stmt->setString(3, c.get_emailAddress());
 	prep_stmt->setString(4, c.get_phoneNumber());
 	prep_stmt->setString(5, c.get_physicalAddress());
 	prep_stmt->setString(6, c.get_Notes());
@@ -107,7 +107,7 @@ Client GetClient(int ClientId){
 	return c;
 }
 void UpdateClient(Client c){
-		sql::Driver *driver;
+	sql::Driver *driver;
 	sql::Connection *con;
 	sql::PreparedStatement *prep_stmt;
 
@@ -121,7 +121,7 @@ void UpdateClient(Client c){
 
 	prep_stmt->setString(1, c.get_title());
 	prep_stmt->setString(2, c.get_clientName());
-	prep_stmt->setString(3, c.get_emailAddress);
+	prep_stmt->setString(3, c.get_emailAddress());
 	prep_stmt->setString(4, c.get_phoneNumber());
 	prep_stmt->setString(5, c.get_physicalAddress());
 	prep_stmt->setString(6, c.get_Notes());
