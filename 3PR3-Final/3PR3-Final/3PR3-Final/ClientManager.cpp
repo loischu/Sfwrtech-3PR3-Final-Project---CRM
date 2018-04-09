@@ -22,7 +22,7 @@ ClientManager::~ClientManager(void)
 {
 }
 
-int AddClient(Client c){
+int ClientManager::AddClient(Client c){
 	int id = 0;
 
 	sql::Driver *driver;
@@ -66,7 +66,7 @@ int AddClient(Client c){
 
 	return id;
 }
-Client GetClient(int ClientId){
+Client ClientManager::GetClient(int ClientId){
 
 	sql::Driver *driver;
 	sql::Connection *con;
@@ -106,7 +106,7 @@ Client GetClient(int ClientId){
 
 	return c;
 }
-void UpdateClient(Client c){
+void ClientManager::UpdateClient(Client c){
 	sql::Driver *driver;
 	sql::Connection *con;
 	sql::PreparedStatement *prep_stmt;

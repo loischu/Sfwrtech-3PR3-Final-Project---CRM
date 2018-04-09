@@ -59,25 +59,28 @@ int choice1 = 0;
 int choice2 = 3;
 // third menu
 int choice3 = 3;
-int keyword;
+// return vector size
+int size;
+string keyword;
 char repId[20];
 char company[20];
 
+// vectors to hold results
 vector<Case> cVec;
 vector<Client> clVec;
 vector<Company> coVec;
 
-	//class objects
-	Case c;
-	Company co;
-	Client cl;
-	Representative r;
+//class objects
+Case c;
+Company co;
+Client cl;
+Representative r;
 
-	//manager class objects
-	CaseManager cm;
-	CompanyManager com;
-	ClientManager clm;
-	RepresentativeManager rm;
+//manager class objects
+CaseManager cm;
+CompanyManager com;
+ClientManager clm;
+RepresentativeManager rm;
 
 
 
@@ -118,6 +121,7 @@ void menu(){
 
 		default:
 			cout << "Invalid input!\n";
+			exitConfirm();
 			break;
 
 		}
@@ -134,10 +138,12 @@ void search(void) {
 		// work on search with key word
 		switch (choice2){
 
-		case 1:
+		case 3:
 			searchInput();
+			cVec = cm.GetCases(keyword);
+			size = static_cast<int>(cVec.size());
 			// search
-			if (true){
+			if (size>0){
 				// if have res
 				showCasesDetail();
 			}
@@ -149,8 +155,10 @@ void search(void) {
 
 		case 2:
 			searchInput();
+			clVec = clm.GetClients(keyword);
+			size = static_cast<int>(clVec.size());
 			// search
-			if (true){
+			if (size>0){
 				// if have res
 				showClientsDetail();
 			}
@@ -160,10 +168,12 @@ void search(void) {
 			}
 			break;
 
-		case 3:
+		case 1:
 			searchInput();
+			coVec = com.getCompanies(keyword);
+			size = static_cast<int>(coVec.size());
 			// search
-			if (true){
+			if (size>0){
 				// if have res
 				showCompanysDetail();
 			}
@@ -192,9 +202,9 @@ void openExisting(void) {
 		// check keyword(caseID)
 		//keyword;
 		//if exist
+		c = cm.GetCase(stoi(keyword));
 
-		if (keyword == c.get_caseID()){
-		
+		if (stoi(keyword) == c.get_caseID()){
 			caseDetail();
 		}
 		else{
@@ -248,6 +258,7 @@ void editCase(void) {
 			} while (res != 'Y');
 			//update
 			c.set_details(details);
+			cm.UpdateCase(c);
 			editSaved();
 			break;
 
@@ -262,6 +273,7 @@ void editCase(void) {
 			} while (res != 'Y');
 			//update
 			c.set_type(type);
+			cm.UpdateCase(c);
 			editSaved();
 			break;
 
@@ -295,6 +307,7 @@ void editCompany(void) {
 			} while (res != 'Y');
 			//update
 			co.set_name(name);
+			com.updateCompany(co);
 			editSaved();
 			break;
 
@@ -309,6 +322,7 @@ void editCompany(void) {
 			} while (res != 'Y');
 			//update
 			co.set_address(address);
+			com.updateCompany(co);
 			editSaved();
 			break;
 
@@ -323,6 +337,7 @@ void editCompany(void) {
 			} while (res != 'Y');
 			//update
 			co.set_sector(sector);
+			com.updateCompany(co);
 			editSaved();
 			break; 
 
@@ -356,6 +371,7 @@ void editClient(void) {
 			} while (res != 'Y');
 			//update
 			cl.set_clientName(name);
+			clm.UpdateClient(cl);
 			editSaved();
 			break;
 
@@ -370,6 +386,7 @@ void editClient(void) {
 			} while (res != 'Y');
 			//update
 			cl.set_title(title);
+			clm.UpdateClient(cl);
 			editSaved();
 			break;
 
@@ -384,6 +401,7 @@ void editClient(void) {
 			} while (res != 'Y');
 			//update
 			cl.set_emailAddress(emailAddress);
+			clm.UpdateClient(cl);
 			editSaved();
 			break;
 
@@ -398,6 +416,7 @@ void editClient(void) {
 			} while (res != 'Y');
 			//update
 			cl.set_phoneNumber(phoneNumber);
+			clm.UpdateClient(cl);
 			editSaved();
 			break;
 
@@ -412,6 +431,7 @@ void editClient(void) {
 			} while (res != 'Y');
 			//update
 			cl.set_physicalAddress(physicalAddress);
+			clm.UpdateClient(cl);
 			editSaved();
 			break;
 
@@ -426,6 +446,7 @@ void editClient(void) {
 			} while (res != 'Y');
 			//update
 			cl.set_Notes(notes);
+			clm.UpdateClient(cl);
 			editSaved();
 			break;
 
@@ -482,8 +503,13 @@ void showCasesDetail(void) {
 	int res = 0;
 	Case p;
 	// Case ID, Client Name, Representative Name and Representative Name
+	cout << "Case ID - Client Name - Representative Name - Detail\n";
 	for (std::vector<Case>::iterator it = cVec.begin(); it != cVec.end(); ++it) {
-	//	cout << it->get_caseId() + " - " + it->get_clientId() + " - " + it->get_repId() + " - " + it->get_type() + "\n";
+		// get the client
+		cl = clm.GetClient(it->get_clientID());
+		// get the rep
+		r = rm.GetRepresentative(it->get_repID());
+		cout << it->get_caseID() + " - " + cl.get_clientName() + " - " + r.get_Name() + " - " + it->get_type() + "\n";
 	}
 	// selection part
 	cout << "please select one to edit or 0 to go back to menu\n";
@@ -494,12 +520,8 @@ void showCasesDetail(void) {
 	else{
 		//this is for asking for user input and set the data of case
 
+		c = cm.GetCase(res);
 		// set the case to edit
-		//c.set_caseId("1");
-		//c.set_clientId("1");
-		//c.set_repId("1");
-		//c.set_details("case 1 details");
-		//c.set_type("report");
 		showCaseDetail();
 		editCase();
 	}
@@ -507,8 +529,11 @@ void showCasesDetail(void) {
 void showClientsDetail(void) {
 	int res = 0;
 	// Client Name, Title and associated Company Name
+	cout << "Client ID - Title - Name - Company ID\n";
 	for (std::vector<Client>::iterator it = clVec.begin(); it != clVec.end(); ++it) {
-		//cout << it->get_clientId() + " - " + it->get_name() + " - " + it->get_companyId() + "\n";
+		// get the company
+		co = com.getCompany(it->get_companyId());
+		cout << it->get_clientID() + " - " + it->get_title() + " - " + it->get_clientName() + " - " + co.get_name() + "\n";
 	}
 	// selection part
 	cout << "please select one to edit or 0 to go back to menu\n";
@@ -517,16 +542,7 @@ void showClientsDetail(void) {
 		menu();
 	}
 	else{
-		//this is for asking for user input and set the data of client
-		//cl.set_companyId("1");
-		//cl.set_clientId("1");
-		//cl.set_name("Chris");
-		//cl.set_title("Manager");
-		//cl.set_emailAddress("chris@gmail.com");
-		//cl.set_phoneNumber("2899924367");
-		//cl.set_physicalAddress("180 Duke St");
-		//cl.set_notes("None");
-		//clVec.push_back(cl);
+		cl = clm.GetClient(res);
 		showClientDetail();
 		editClient();
 	}
@@ -534,8 +550,9 @@ void showClientsDetail(void) {
 void showCompanysDetail(void) {
 	int res = 0;
 	// company name and sector
+	cout << "Company ID - Company Name - Sector\n";
 	for (std::vector<Company>::iterator it = coVec.begin(); it != coVec.end(); ++it) {
-		//cout << it->get_companyId() + " - " + it->get_name() + " - " + it->get_sector() + "\n";
+		cout << it->get_companyId() + " - " + it->get_name() + " - " + it->get_sector() + "\n";
 	}
 	// selection part
 	cout << "please select one to edit or 0 to go back to menu\n";
@@ -544,14 +561,10 @@ void showCompanysDetail(void) {
 		menu();
 	}
 	else{
-		//this is for asking for user input and set the data of company
-	//	co.set_companyId("1");
-		//co.set_name("Google");
-		//co.set_address("1 google drive");
-		//co.set_sector("sector 1");
-		//coVec.push_back(co);
-		//showCompanyDetail();
-		//editCompany();
+		co = com.getCompany(res);
+
+		showCompanyDetail();
+		editCompany();
 	}
 }
 
@@ -660,61 +673,33 @@ void openExistingMenu(void) {
 }
 
 void createNewMenu(void) {
+	bool existingCl = false;
+	bool existingCo = false;
+	int company;
+	int client;
 	char res = 'N';
-	cout << "Is it for an existing client(Y/N)";
-	cin >> res;
-	if (res == 'Y'){
-		int client;
-		cout << "Please enter the client ID:";
-		cin >> client;
-		//check client and company
-		if (client == cl.get_clientID()){
-			cout << "The client and your company exists.\n";
-		}
-		else{
-			// else back to menu
-			cout << "The client and company doesn't exist.\n";
-			menu();
-		}
-	}
-	else{
-		cout << "Is the associated company is within its records(Y/N)";
+	char res2 = 'N';
+
+	// get commpany info
+	do {
+		cout << "Does the associated company exist(Y/N)";
 		cin >> res;
 		if (res == 'Y'){
-			//check company
-			if (co.get_name() == company){
-				char name[20];
-				char title[20];
-				char emailAddress[20];
-				char phoneNumber[20];
-				char physicalAddress[20];
-				char notes[20];
-				cout << "Your company exists.Please provide information of the client:\n";
-				cout << "Please enter the name:";
-				cin >> name;
-				cout << "Please enter the title:";
-				cin >> title;
-				cout << "Please enter the email address:";
-				cin >> emailAddress;
-				cout << "Please enter the phone number:";
-				cin >> phoneNumber;
-				cout << "Please enter the physical address:";
-				cin >> physicalAddress;
-				cout << "Please enter the notes:";
-				cin >> notes;
-				cl.set_clientName(name);
-				cl.set_title(title);
-				cl.set_emailAddress(emailAddress);
-				cl.set_phoneNumber(phoneNumber);
-				cl.set_physicalAddress(physicalAddress);
-				cl.set_Notes(notes);
-				// add to vector
-				clVec.push_back(cl);
+			cout << "Please enter the company ID:" << endl;
+			cin >> company;
+			co = com.getCompany(company);
+			//check client and company
+			if (company == co.get_companyId()){
+				cout << "The company exists.\n";
+				existingCo = true;
 			}
 			else{
 				// else back to menu
-				cout << "The client and company doesn't exist.\n";
-				menu();
+				cout << "The copany doesn't exist. Do you want to continue?(Y/N)\n";
+				cin >> res2;
+				if (res2 != 'Y'){
+					menu();
+				}
 			}
 		}
 		else{
@@ -723,18 +708,45 @@ void createNewMenu(void) {
 			char address[20];
 			char sector[20];
 			cout << "Please provide information of the company:\n";
-			cout << "Please enter the name:";
+			cout << "Please enter the name:" << endl;
 			cin >> Cname;
-			cout << "Please enter the address:";
+			cout << "Please enter the address:" << endl;
 			cin >> address;
-			cout << "Please enter the sector:";
+			cout << "Please enter the sector:" << endl;
 			cin >> sector;
 
 			co.set_name(Cname);
 			co.set_address(address);
-			// add to vector
-			coVec.push_back(co);
+			co.set_sector(sector);
+			// add to database
+			com.createCompany(co);
+			existingCo = true;
+		}
+	} while (existingCo == false);
 
+	// get client info
+	do {
+		cout << "Is it for an existing client(Y/N)";
+		cin >> res;
+		if (res == 'Y'){
+			cout << "Please enter the client ID:" << endl;
+			cin >> client;
+			cl = clm.GetClient(client);
+			//check client and company
+			if (client == cl.get_clientID()){
+				cout << "The client exists.\n";
+				existingCl = true;
+			}
+			else{
+				// else back to menu
+				cout << "The client doesn't exist. Do you want to continue?(Y/N)\n";
+				cin >> res2;
+				if (res2 != 'Y'){
+					menu();
+				}
+			}
+		}
+		else{
 			// client
 			char name[20];
 			char title[20];
@@ -742,18 +754,18 @@ void createNewMenu(void) {
 			char phoneNumber[20];
 			char physicalAddress[20];
 			char notes[20];
-			cout << "Your company exists.Please provide information of the client:\n";
-			cout << "Please enter the name:";
+			cout << "Please provide information of the client:\n";
+			cout << "Please enter the name:" << endl;
 			cin >> name;
-			cout << "Please enter the title:";
+			cout << "Please enter the title:" << endl;
 			cin >> title;
-			cout << "Please enter the email address:";
+			cout << "Please enter the email address:" << endl;
 			cin >> emailAddress;
-			cout << "Please enter the phone number:";
+			cout << "Please enter the phone number:" << endl;
 			cin >> phoneNumber;
-			cout << "Please enter the physical address:";
+			cout << "Please enter the physical address:" << endl;
 			cin >> physicalAddress;
-			cout << "Please enter the notes:";
+			cout << "Please enter the notes:" << endl;
 			cin >> notes;
 
 			cl.set_clientName(name);
@@ -762,24 +774,27 @@ void createNewMenu(void) {
 			cl.set_phoneNumber(phoneNumber);
 			cl.set_physicalAddress(physicalAddress);
 			cl.set_Notes(notes);
-			// add to vector
-			clVec.push_back(cl);
+			// set the company id with last data
+			cl.set_companyId(co.get_companyId());
+			// add to database
+			clm.AddClient(cl);
+			existingCl = true;
 		}
-	}
+	} while (existingCl == false);
+	
 
 	// create case
 	char type[20];
 	char detail[20];
-	cout << "Please enter the type:";
+	cout << "Please enter the type:" << endl;
 	cin >> type;
-	cout << "Please enter the detail:";
+	cout << "Please enter the detail:" << endl;
 	cin >> detail;
-//	c.set_type(type);
-//	c.set_details(detail);
-//	c.set_clientID(cl.get_clientID());
-//	c.set_repID(repId);
-	// add to vector
-	cVec.push_back(c);
+	c.set_type(type);
+	c.set_details(detail);
+	c.set_clientID(cl.get_clientID());
+	// add to database
+	cm.AddCase(c);
 
 	// success
 	cout << "Case created successfully and the case ID is"  << c.get_caseID()  <<  " .\nDo you want to create new record?(Y/N)";
@@ -804,4 +819,3 @@ void caseDetail(void) {
 		menu();
 	}
 }
-

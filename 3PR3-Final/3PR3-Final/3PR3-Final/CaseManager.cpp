@@ -21,7 +21,7 @@ CaseManager::~CaseManager(void)
 }
 
 
-int AddCase(Case c){
+int CaseManager::AddCase(Case c){
 	int id = 0;
 
 	sql::Driver *driver;
@@ -36,18 +36,19 @@ int AddCase(Case c){
 	/* Connect to the database */
 	con->setSchema("dbo");
 
-	prep_stmt = con->prepareStatement("INSERT INTO Client (Details, Type) VALUES (?, ?)");
+	prep_stmt = con->prepareStatement("INSERT INTO `Case` (Client_ID, Rep_ID, Details, Type) VALUES (?,?,?, ?)");
 
 
-
-	prep_stmt->setString(1, c.get_details());
-	prep_stmt->setString(2, c.get_type());
+	prep_stmt->setInt(1, c.get_clientID());
+	prep_stmt->setInt(2, c.get_repID());
+	prep_stmt->setString(3, c.get_details());
+	prep_stmt->setString(4, c.get_type());
 	prep_stmt->execute();
 
 	delete prep_stmt ;
 
 	stmt = con->createStatement();
-	res = stmt->executeQuery("SELECT MAX(Case_ID) id FROM Case;"); 
+	res = stmt->executeQuery("SELECT MAX(Case_ID) id FROM `Case`;"); 
 	while (res->next()) {
 		id=res->getInt("id");
 
@@ -64,7 +65,7 @@ int AddCase(Case c){
 
 }
 
-void UpdateCase(Case c){
+void CaseManager::UpdateCase(Case c){
 	sql::Driver *driver;
 	sql::Connection *con;
 	sql::PreparedStatement *prep_stmt;
@@ -75,7 +76,7 @@ void UpdateCase(Case c){
 	/* Connect to the database */
 	con->setSchema("dbo");
 
-	prep_stmt = con->prepareStatement("UPDATE Case SET Details = ?, Type = ? WHERE Case_ID = ?");
+	prep_stmt = con->prepareStatement("UPDATE `Case` SET Details = ?, Type = ? WHERE Case_ID = ?");
 
 	prep_stmt->setString(1, c.get_details());
 	prep_stmt->setString(2, c.get_type());
@@ -87,7 +88,7 @@ void UpdateCase(Case c){
 
 }
 
-Case GetCase(int CaseId){
+Case CaseManager::GetCase(int CaseId){
 	sql::Driver *driver;
 	sql::Connection *con;
 	sql::Statement *stmt;
@@ -104,7 +105,7 @@ Case GetCase(int CaseId){
 
 	ostringstream oss;
 
-	oss << "SELECT * FROM Case WHERE Case_ID = " << CaseId;
+	oss << "SELECT * FROM `Case` WHERE Case_ID = " << CaseId;
 
 	res = stmt->executeQuery(oss.str()); 
 
@@ -146,7 +147,7 @@ vector<Case> CaseManager::GetCases(string keyword)
 
 	ostringstream oss;
 
-	string sql = "SELECT * FROM Case WHERE ";
+	string sql = "SELECT * FROM `Case` WHERE ";
 
 	oss << "Details LIKE '%" << keyword << "%' OR "
 		<< "Type LIKE '%" << keyword << "%';";
@@ -154,6 +155,7 @@ vector<Case> CaseManager::GetCases(string keyword)
 	sql += oss.str();
 
 	res = stmt->executeQuery(sql);
+
 
 	while (res->next()){
 		curr.set_caseID(res->getInt("Case_ID"));

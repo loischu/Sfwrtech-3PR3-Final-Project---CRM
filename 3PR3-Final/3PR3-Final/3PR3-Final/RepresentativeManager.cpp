@@ -22,7 +22,7 @@ RepresentativeManager::~RepresentativeManager(void)
 {
 }
 
-int AddRepresentative(Representative c){
+int RepresentativeManager::AddRepresentative(Representative c){
 	int id = 0;
 
 	sql::Driver *driver;
@@ -62,7 +62,7 @@ int AddRepresentative(Representative c){
 
 }
 
-void UpdateRepresentative(Representative c){
+void RepresentativeManager::UpdateRepresentative(Representative c){
 	sql::Driver *driver;
 	sql::Connection *con;
 	sql::PreparedStatement *prep_stmt;
@@ -84,7 +84,7 @@ void UpdateRepresentative(Representative c){
 
 }
 
-Representative GetRepresentative(int RepresentativeId){
+Representative RepresentativeManager::GetRepresentative(int RepresentativeId){
 
 	sql::Driver *driver;
 	sql::Connection *con;
